@@ -1,14 +1,19 @@
 {
-  "package_id": "com.decoded.tmuxg2",
+  "package_id": "com.krishpkreame.tmuxg2",
   "edition": "202601",
-  "name": "tmux-g2",
+  "name": "tmux-even-g2",
   "version": "0.0.1",
   "min_app_version": "2.0.0",
   "min_sdk_version": "0.0.9",
   "tagline": "Mirror your tmux terminal to G2 glasses in real-time",
   "description": "Connects to a remote tmux session and mirrors terminal output to Even Realities G2 smart glasses. Code on your machine, read the terminal on your lens.",
-  "author": "decoded",
+  "author": "Krish Patel",
   "entrypoint": "index.html",
-  "permissions": [],
+  "permissions": [
+    {
+      "name": "network",
+      "desc": "Fetch tmux terminal output from local LAN bridge server"
+    }
+  ],
   "supported_languages": ["en"]
 }
