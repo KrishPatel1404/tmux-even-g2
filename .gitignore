@@ -1,0 +1,47 @@
+# deps
+node_modules/
+.pnp
+.pnp.js
+
+# build
+dist/
+out/
+*.ehpk
+
+# lockfiles (not pnpm)
+pnpm-lock.yaml
+pnpm-workspace.yaml
+
+# env
+.env
+.env.*
+!.env.example
+
+# claude / local docs — not for repo
+docs/
+.claude/
+CLAUDE.md
+CLAUDE.original.md
+build-evenhub-app.md
+
+# OS
+.DS_Store
+Thumbs.db
+
+# editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# typescript
+*.tsbuildinfo
