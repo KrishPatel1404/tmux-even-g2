@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "pack": "npm run build && npx evenhub pack app.json dist -o tmux-g2.ehpk",
     "qr": "npx evenhub qr --url http://$(ipconfig getifaddr en0):5173",
-    "test": "vitest"
+    "test": "vitest",
+    "kill": "bash scripts/kill.sh"
   },
   "dependencies": {
     "@evenrealities/even_hub_sdk": "^0.0.10"
