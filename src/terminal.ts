@@ -6,6 +6,6 @@ export function formatTerminal(raw: string): string {
   const rows = lines.slice(-ROWS)
   while (rows.length < ROWS) rows.unshift('')
   return rows
-    .map(line => line.slice(0, COLS).padEnd(COLS))
+    .map(line => line.replaceAll('─', '-').slice(0, COLS).padEnd(COLS))
     .join('\n')
 }

@@ -33,7 +33,7 @@ tmux split-window -t "${SESSION}:server" -v -l 5
 tmux send-keys -t "${SESSION}:server.1" "cd '${PROJECT_DIR}' && node scripts/bridge.js" Enter
 
 # Work window: interactive shell locked to G2 grid (50 cols x 10 rows)
-tmux new-window -t "${SESSION}" -n work
+tmux new-window -t "${SESSION}" -n work "env BASH_SILENCE_DEPRECATION_WARNING=1 PS1='$ ' /bin/bash --norc --noprofile"
 tmux set-window-option -t "${SESSION}:work" window-size manual
 tmux resize-window -t "${SESSION}:work" -x 50 -y 10
 

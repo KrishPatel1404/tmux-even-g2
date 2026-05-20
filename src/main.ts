@@ -60,10 +60,26 @@ function startPolling(): void {
 // ── input ─────────────────────────────────────────────────────────────────────
 
 function handleEvent(event: EvenHubEvent): void {
-  const raw  = event.listEvent?.eventType ?? event.textEvent?.eventType ?? event.sysEvent?.eventType
-  const type = raw ?? 0
+  if (event.textEvent) {
+    const type = event.textEvent.eventType ?? 0
+    if (type === C.EVT_SCROLL_UP || type === C.EVT_SCROLL_DOWN) {
+      const endpoint = type === C.EVT_SCROLL_UP ? 'scroll-up' : 'scroll-down'
+      void fetch(`${bridgeUrl}${endpoint}`, { cache: 'no-store' })
+        .then(r => r.text())
+        .then(raw => updateText(bridge!, CONTAINER_ID, CONTAINER_NAME, formatTerminal(raw)))
+    }
+    return
+  }
 
+  const type = event.sysEvent?.eventType ?? 0
   switch (type) {
+    case C.EVT_CLICK:
+      // single tap → exit copy-mode, resume live tail
+      void fetch(`${bridgeUrl}scroll-reset`, { cache: 'no-store' })
+      break
+    case C.EVT_DOUBLE:
+      bridge!.shutDownPageContainer(1)
+      break
     case C.EVT_FOREGROUND:
       startPolling()
       break
