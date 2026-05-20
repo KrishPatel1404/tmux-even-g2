@@ -16,6 +16,7 @@ const POLL_MS        = 250
 let bridge: EvenAppBridge | null = null
 let pollInterval: ReturnType<typeof setInterval> | null = null
 let bridgeUrl = ''
+let displayVisible = true
 
 // ── display ───────────────────────────────────────────────────────────────────
 
@@ -78,7 +79,13 @@ function handleEvent(event: EvenHubEvent): void {
       void fetch(`${bridgeUrl}scroll-reset`, { cache: 'no-store' })
       break
     case C.EVT_DOUBLE:
-      bridge!.shutDownPageContainer(1)
+      displayVisible = !displayVisible
+      if (displayVisible) {
+        startPolling()
+      } else {
+        stopPolling()
+        void updateText(bridge!, CONTAINER_ID, CONTAINER_NAME, Array(10).fill(' '.repeat(50)).join('\n'))
+      }
       break
     case C.EVT_FOREGROUND:
       startPolling()
